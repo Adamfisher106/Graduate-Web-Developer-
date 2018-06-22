@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>flikr task one</title>
+   <meta charset="utf-8" />
+    <style>
+        img {
+            padding-bottom: 3%;
+            padding-left: 3%;
+            width: 30%;
+            max-height: 300px;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #FFF;
+        }
+
+            h2 a {
+                color: #0184e3;
+                text-decoration: none;
+            }
+
+                h2 a:hover {
+                    text-decoration: underline;
+                }
+
+            h3 a {
+                color: #00e8ff;
+                text-decoration: none;
+            }
+
+                h3 a:hover {
+                    text-decoration: underline;
+                }
+
+        .container {
+            max-width: 985px;
+            margin: auto;
+            color: #FFF;
+            font-size: 25px;
+        }
+
+            .container h3 {
+                font-size: 20px;
+            }
+
+        #content {
+            margin: auto;
+            padding: 10px;
+        }
+
+        #outputDiv {
+            color: #0184e3;
+        }
+
+        input, #submit {
+            font-size: 25px;
+        
+        }
+        input{
+            width:80%;
+        }
+        #search{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task 1 Pull images from flickr</h1>
+    <div class="container">
+        <div id="content">
+            <input id="search" type="text" placeholder="search for images" />
+            <button id="submit" onclick="JavaScriptFetch()">Submit</button>
+            <div id="outputDiv"></div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+     
+        function JavaScriptFetch() {
+            var script = document.createElement('script');
+            script.src = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + document.getElementById("search").value;;
+            document.querySelector('head').appendChild(script);
+        }
+
+        function jsonFlickrFeed(data) {
+            var image = "";
+            data.items.forEach(function (element) {
+                image += "<img src=\"" + element.media.m + "\"/>";
+            });
+            
+            document.getElementById("outputDiv").innerHTML = image;
+        }
+   
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+    
+            $("#submit").click(function (e) {
+                $("#outputDiv").html("");
+
+            });
+        });
+    </script>
+</body>
+</html>
